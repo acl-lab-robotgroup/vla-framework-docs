@@ -12,7 +12,7 @@ Run from this directory using Pixi:
 pixi run serve
 ```
 
-Open <http://0.0.0.0:8000/>. Saved Markdown changes reload automatically.
+Open <http://127.0.0.1:8000/vla-framework-docs/>. Saved Markdown changes reload automatically.
 Press Ctrl+C in the server terminal to stop the preview.
 
 To install the environment from a fresh checkout:
@@ -33,16 +33,21 @@ pixi run build
 
 The generated static site is written to `site/`, which is ignored by Git.
 
-## Publishing later
+## GitHub Pages
 
-This is a local Git repository with no remote or automatic deployment configured.
-The preview binds to the local machine only.
+Published site: <https://acl-lab-robotgroup.github.io/vla-framework-docs/>.
 
-When ready, create a separate GitHub repository named `vla-framework-docs`,
-connect it as the remote, and configure a GitHub Actions workflow to build and
-deploy the `site/` directory to GitHub Pages. Set `site_url` in `mkdocs.yml` to
-the eventual documentation URL at that point. Review the documentation content
-before making that repository public.
+The `.github/workflows/pages.yml` workflow builds the documentation with Pixi
+and deploys `site/` to GitHub Pages whenever commits are pushed to `main`.
+It can also be started manually from the repository's **Actions** tab.
+
+In the repository's **Settings → Pages**, set **Build and deployment → Source**
+to **GitHub Actions**. Check **Actions → Deploy documentation** for build and
+deployment status.
+
+The canonical URL in `mkdocs.yml` includes `/vla-framework-docs/`, so the local
+preview serves the documentation under that same path. The preview listens on
+all network interfaces as configured in the `serve` Pixi task.
 
 Keep the application repository and this documentation repository separate:
 
