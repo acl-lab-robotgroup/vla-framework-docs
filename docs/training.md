@@ -48,4 +48,25 @@ If you resized into a separate `_resized` dataset and uploaded it under that ID,
 use that repository ID for training. An existing experiment output directory
 may require selecting a new path or configuring resume behavior.
 
+## Video timestamp errors with merged datasets
+
+Merged datasets may raise `FrameTimestampError` during training. Concatenated
+videos can have small timestamp offsets that affect TorchCodec's approximate
+frame seeking, while floating-point rounding can exceed a strict timestamp
+tolerance. If this occurs, try adding both flags to the training command:
+
+```bash
+--dataset.video_backend=pyav \
+--tolerance_s=0.001
+```
+
+`pyav` decodes forward from a preceding keyframe using actual frame timestamps,
+avoiding the approximate seeking issue. It may be slower. `tolerance_s=0.001`
+allows a 1 ms timestamp difference; set it explicitly because the training CLI
+defaults to `0.0001` (0.1 ms).
+
+If errors persist, inspect the video timestamps and dataset metadata. Keep the
+tolerance well below one frame interval (`1 / fps`) so that it does not hide
+missing frames or image/state/action misalignment.
+
 Continue with [Deployment](deployment.md) after preparing a trained policy.
