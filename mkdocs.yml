@@ -1,0 +1,24 @@
+site_name: VLA Framework
+site_description: Guides for robot data collection, dataset preprocessing, policy training, and deployment.
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - bash
+    - python
+    - yaml
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - Data Collection: data-collection.md
+  - Preprocessing: preprocessing.md
+  - Dataset Tools: dataset-tools.md
+  - Training: training.md
+  - Deployment: deployment.md

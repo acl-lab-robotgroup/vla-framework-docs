@@ -1,0 +1,13 @@
+[workspace]
+name = "vla-framework-docs"
+version = "0.1.0"
+channels = ["conda-forge"]
+platforms = ["linux-64", "linux-aarch64"]
+
+[tasks]
+serve = "mkdocs serve --dev-addr 0.0.0.0:8000"
+build = "mkdocs build --strict"
+
+[dependencies]
+python = "3.12.*"
+mkdocs = ">=1.6,<2"
